@@ -26,6 +26,16 @@ static const CGFloat kTOCropOverLayerCornerWidth = 20.0f;
 
 @interface TOCropOverlayView ()
 
+@property (nonatomic, strong) NSArray *horizontalGridLines;
+@property (nonatomic, strong) NSArray *verticalGridLines;
+
+@property (nonatomic, strong) NSArray *outerLineViews;   //top, right, bottom, left
+
+@property (nonatomic, strong) NSArray *topLeftLineViews; //vertical, horizontal
+@property (nonatomic, strong) NSArray *bottomLeftLineViews;
+@property (nonatomic, strong) NSArray *bottomRightLineViews;
+@property (nonatomic, strong) NSArray *topRightLineViews;
+
 @end
 
 @implementation TOCropOverlayView
@@ -46,6 +56,8 @@ static const CGFloat kTOCropOverLayerCornerWidth = 20.0f;
         return [self createNewLineView];
     };
     
+    _lineColor = UIColor.whiteColor;
+    
     _outerLineWidth = 1.0;
     _innerLineWidth = 1.0f / [[UIScreen mainScreen] scale];;
     _lineWidth = 3.0;
@@ -58,6 +70,39 @@ static const CGFloat kTOCropOverLayerCornerWidth = 20.0f;
     
     self.displayHorizontalGridLines = YES;
     self.displayVerticalGridLines = YES;
+}
+
+- (void)setLineColor:(UIColor *)lineColor
+{
+    _lineColor = lineColor;
+    
+    for (UIView *line in self.horizontalGridLines) {
+        line.backgroundColor = lineColor;
+    }
+    
+    for (UIView *line in self.verticalGridLines) {
+        line.backgroundColor = lineColor;
+    }
+    
+    for (UIView *line in self.outerLineViews) {
+        line.backgroundColor = lineColor;
+    }
+    
+    for (UIView *line in self.topLeftLineViews) {
+        line.backgroundColor = lineColor;
+    }
+    
+    for (UIView *line in self.topRightLineViews) {
+        line.backgroundColor = lineColor;
+    }
+    
+    for (UIView *line in self.bottomLeftLineViews) {
+        line.backgroundColor = lineColor;
+    }
+    
+    for (UIView *line in self.bottomRightLineViews) {
+        line.backgroundColor = lineColor;
+    }
 }
 
 - (void)setFrame:(CGRect)frame

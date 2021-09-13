@@ -850,6 +850,8 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
     return YES;
 }
 
+#pragma mark - DidEdit -
+
 #pragma mark - Timer -
 - (void)startResetTimer
 {
