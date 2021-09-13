@@ -35,6 +35,10 @@ NS_ASSUME_NONNULL_BEGIN
 /** Add/Remove the interior vertical grid lines. */
 @property (nonatomic, assign) BOOL displayVerticalGridLines;
 
+@property (nonatomic, assign) double outerLineWidth;
+@property (nonatomic, assign) double innerLineWidth;
+@property (nonatomic, assign) double lineWidth;
+
 @property (nonatomic, strong) NSArray *horizontalGridLines;
 @property (nonatomic, strong) NSArray *verticalGridLines;
 

@@ -45,9 +45,12 @@ static const CGFloat kTOCropOverLayerCornerWidth = 20.0f;
     UIView *(^newLineView)(void) = ^UIView *(void){
         return [self createNewLineView];
     };
+    
+    _outerLineWidth = 1.0;
+    _innerLineWidth = 1.0f / [[UIScreen mainScreen] scale];;
+    _lineWidth = 3.0;
 
     _outerLineViews     = @[newLineView(), newLineView(), newLineView(), newLineView()];
-    
     _topLeftLineViews   = @[newLineView(), newLineView()];
     _bottomLeftLineViews = @[newLineView(), newLineView()];
     _topRightLineViews  = @[newLineView(), newLineView()];
@@ -83,10 +86,26 @@ static const CGFloat kTOCropOverLayerCornerWidth = 20.0f;
         
         CGRect frame = CGRectZero;
         switch (i) {
-            case 0: frame = (CGRect){0,-1.0f,boundsSize.width+2.0f, 1.0f}; break; //top
-            case 1: frame = (CGRect){boundsSize.width,0.0f,1.0f,boundsSize.height}; break; //right
-            case 2: frame = (CGRect){-1.0f,boundsSize.height,boundsSize.width+2.0f,1.0f}; break; //bottom
-            case 3: frame = (CGRect){-1.0f,0,1.0f,boundsSize.height+1.0f}; break; //left
+            case 0: frame = (CGRect){
+                0,
+                -self.outerLineWidth,
+                boundsSize.width+2*self.outerLineWidth,
+                self.outerLineWidth}; break; //top
+            case 1: frame = (CGRect){
+                boundsSize.width,
+                0.0f,
+                self.outerLineWidth,
+                boundsSize.height}; break; //right
+            case 2: frame = (CGRect){
+                -self.outerLineWidth,
+                boundsSize.height,
+                boundsSize.width+2*self.outerLineWidth,
+                self.outerLineWidth}; break; //bottom
+            case 3: frame = (CGRect){
+                -self.outerLineWidth,
+                0,
+                self.outerLineWidth,
+                boundsSize.height+self.outerLineWidth}; break; //left
         }
         
         lineView.frame = frame;
@@ -100,20 +119,52 @@ static const CGFloat kTOCropOverLayerCornerWidth = 20.0f;
         CGRect verticalFrame = CGRectZero, horizontalFrame = CGRectZero;
         switch (i) {
             case 0: //top left
-                verticalFrame = (CGRect){-3.0f,-3.0f,3.0f,kTOCropOverLayerCornerWidth+3.0f};
-                horizontalFrame = (CGRect){0,-3.0f,kTOCropOverLayerCornerWidth,3.0f};
+                verticalFrame = (CGRect){
+                    -self.lineWidth,
+                    -self.lineWidth,
+                    self.lineWidth,
+                    kTOCropOverLayerCornerWidth+self.lineWidth};
+                horizontalFrame = (CGRect){
+                    0,
+                    -self.lineWidth,
+                    kTOCropOverLayerCornerWidth,
+                    self.lineWidth};
                 break;
             case 1: //top right
-                verticalFrame = (CGRect){boundsSize.width,-3.0f,3.0f,kTOCropOverLayerCornerWidth+3.0f};
-                horizontalFrame = (CGRect){boundsSize.width-kTOCropOverLayerCornerWidth,-3.0f,kTOCropOverLayerCornerWidth,3.0f};
+                verticalFrame = (CGRect){
+                    boundsSize.width,
+                    -self.lineWidth,
+                    self.lineWidth,
+                    kTOCropOverLayerCornerWidth+self.lineWidth};
+                horizontalFrame = (CGRect){
+                    boundsSize.width-kTOCropOverLayerCornerWidth,
+                    -self.lineWidth,
+                    kTOCropOverLayerCornerWidth,
+                    self.lineWidth};
                 break;
             case 2: //bottom right
-                verticalFrame = (CGRect){boundsSize.width,boundsSize.height-kTOCropOverLayerCornerWidth,3.0f,kTOCropOverLayerCornerWidth+3.0f};
-                horizontalFrame = (CGRect){boundsSize.width-kTOCropOverLayerCornerWidth,boundsSize.height,kTOCropOverLayerCornerWidth,3.0f};
+                verticalFrame = (CGRect){
+                    boundsSize.width,
+                    boundsSize.height-kTOCropOverLayerCornerWidth,
+                    self.lineWidth,
+                    kTOCropOverLayerCornerWidth+self.lineWidth};
+                horizontalFrame = (CGRect){
+                    boundsSize.width-kTOCropOverLayerCornerWidth,
+                    boundsSize.height,
+                    kTOCropOverLayerCornerWidth,
+                    self.lineWidth};
                 break;
             case 3: //bottom left
-                verticalFrame = (CGRect){-3.0f,boundsSize.height-kTOCropOverLayerCornerWidth,3.0f,kTOCropOverLayerCornerWidth};
-                horizontalFrame = (CGRect){-3.0f,boundsSize.height,kTOCropOverLayerCornerWidth+3.0f,3.0f};
+                verticalFrame = (CGRect){
+                    -self.lineWidth,
+                    boundsSize.height-kTOCropOverLayerCornerWidth,
+                    self.lineWidth,
+                    kTOCropOverLayerCornerWidth};
+                horizontalFrame = (CGRect){
+                    -self.lineWidth,
+                    boundsSize.height,
+                    kTOCropOverLayerCornerWidth+self.lineWidth,
+                    self.lineWidth};
                 break;
         }
         
@@ -122,7 +173,7 @@ static const CGFloat kTOCropOverLayerCornerWidth = 20.0f;
     }
     
     //grid lines - horizontal
-    CGFloat thickness = 1.0f / [[UIScreen mainScreen] scale];
+    CGFloat thickness = self.innerLineWidth;
     NSInteger numberOfLines = self.horizontalGridLines.count;
     CGFloat padding = (CGRectGetHeight(self.bounds) - (thickness*numberOfLines)) / (numberOfLines + 1);
     for (NSInteger i = 0; i < numberOfLines; i++) {
