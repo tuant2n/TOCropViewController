@@ -30,10 +30,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol TOCropViewDelegate<NSObject>
 
+@optional
 - (void)cropViewDidBecomeResettable:(nonnull TOCropView *)cropView;
 - (void)cropViewDidBecomeNonResettable:(nonnull TOCropView *)cropView;
-
-@optional
 - (void)cropViewDidChange:(nonnull TOCropView *)cropView;
 
 @end
