@@ -128,6 +128,12 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
     return self;
 }
 
+- (void)setBackgroundColor:(UIColor *)backgroundColor
+{
+    [super setBackgroundColor:backgroundColor];
+    self.overlayView.backgroundColor = [backgroundColor colorWithAlphaComponent:0.35f];
+}
+
 - (void)setup
 {
     __weak typeof(self) weakSelf = self;
