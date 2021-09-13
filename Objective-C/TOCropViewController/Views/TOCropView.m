@@ -128,10 +128,9 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
     return self;
 }
 
-- (void)setBackgroundColor:(UIColor *)backgroundColor
+- (void)setHiddenDimView:(BOOL)hiddenDimView
 {
-    [super setBackgroundColor:backgroundColor];
-    self.overlayView.backgroundColor = [backgroundColor colorWithAlphaComponent:0.35f];
+    self.overlayView.hidden = hiddenDimView;
 }
 
 - (void)setup
