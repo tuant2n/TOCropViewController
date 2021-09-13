@@ -26,16 +26,6 @@ static const CGFloat kTOCropOverLayerCornerWidth = 20.0f;
 
 @interface TOCropOverlayView ()
 
-@property (nonatomic, strong) NSArray *horizontalGridLines;
-@property (nonatomic, strong) NSArray *verticalGridLines;
-
-@property (nonatomic, strong) NSArray *outerLineViews;   //top, right, bottom, left
-
-@property (nonatomic, strong) NSArray *topLeftLineViews; //vertical, horizontal
-@property (nonatomic, strong) NSArray *bottomLeftLineViews;
-@property (nonatomic, strong) NSArray *bottomRightLineViews;
-@property (nonatomic, strong) NSArray *topRightLineViews;
-
 @end
 
 @implementation TOCropOverlayView

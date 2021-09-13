@@ -35,6 +35,16 @@ NS_ASSUME_NONNULL_BEGIN
 /** Add/Remove the interior vertical grid lines. */
 @property (nonatomic, assign) BOOL displayVerticalGridLines;
 
+@property (nonatomic, strong) NSArray *horizontalGridLines;
+@property (nonatomic, strong) NSArray *verticalGridLines;
+
+@property (nonatomic, strong) NSArray *outerLineViews;   //top, right, bottom, left
+
+@property (nonatomic, strong) NSArray *topLeftLineViews; //vertical, horizontal
+@property (nonatomic, strong) NSArray *bottomLeftLineViews;
+@property (nonatomic, strong) NSArray *bottomRightLineViews;
+@property (nonatomic, strong) NSArray *topRightLineViews;
+
 /** Shows and hides the interior grid lines with an optional crossfade animation. */
 - (void)setGridHidden:(BOOL)hidden animated:(BOOL)animated;
 
