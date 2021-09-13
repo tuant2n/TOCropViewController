@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonnull, nonatomic, strong, readonly) UIImage *image;
 
-@property (nonnull, nonatomic, assign) BOOL hiddenDimView;;
+@property (nonatomic, assign) BOOL hiddenDimView;
 
 /**
  The cropping style of the crop view (eg, rectangular or circular)
