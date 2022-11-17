@@ -987,8 +987,13 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    if (!decelerate)
+    if (!decelerate) {
         [self startResetTimer];
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(cropViewDidEndEdit:)]) {
+        [self.delegate cropViewDidEndEdit:self];
+    }
 }
 
 #pragma mark - Accessors -
