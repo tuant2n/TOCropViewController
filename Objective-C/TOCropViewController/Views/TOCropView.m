@@ -940,23 +940,39 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
 {
     [self startEditing];
     self.canBeReset = YES;
+    
+    if ([self.delegate respondsToSelector:@selector(cropViewDidStartEdit:)]) {
+        [self.delegate cropViewDidStartEdit:self];
+    }
 }
 
 - (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(UIView *)view
 {
     [self startEditing];
     self.canBeReset = YES;
+    
+    if ([self.delegate respondsToSelector:@selector(cropViewDidStartEdit:)]) {
+        [self.delegate cropViewDidStartEdit:self];
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     [self startResetTimer];
     [self checkForCanReset];
+    
+    if ([self.delegate respondsToSelector:@selector(cropViewDidEndEdit:)]) {
+        [self.delegate cropViewDidEndEdit:self];
+    }
 }
 
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale {
     [self startResetTimer];
     [self checkForCanReset];
+    
+    if ([self.delegate respondsToSelector:@selector(cropViewDidEndEdit:)]) {
+        [self.delegate cropViewDidEndEdit:self];
+    }
 }
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView
