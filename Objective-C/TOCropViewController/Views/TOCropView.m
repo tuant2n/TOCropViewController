@@ -989,10 +989,10 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
 {
     if (!decelerate) {
         [self startResetTimer];
-    }
-    
-    if ([self.delegate respondsToSelector:@selector(cropViewDidEndEdit:)]) {
-        [self.delegate cropViewDidEndEdit:self];
+        
+        if ([self.delegate respondsToSelector:@selector(cropViewDidEndEdit:)]) {
+            [self.delegate cropViewDidEndEdit:self];
+        }
     }
 }
 
